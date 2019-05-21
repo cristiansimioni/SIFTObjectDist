@@ -31,4 +31,4 @@ Clone the repository using the following command
 
 ## Paper 
 
-:page_with_curl: If you're interested on this application, you can find the full paper [here](paper/paper.pdf) (in Portuguese :brazil:)
+:page_with_curl: If you're interested on this application, you can read the full paper [here](paper/paper.pdf) (in Portuguese :brazil:)

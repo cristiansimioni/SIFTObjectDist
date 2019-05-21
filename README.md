@@ -4,19 +4,29 @@ Finding distance between objects in images using SIFT
 
 ## Code Structure
 
-	main.m       - the entry point of the program
+	main.m               - the entry point of the program
+	sift.m               - script that involkes SIFT program based on various OS
+	SIFTmatch.m          - match SIFT descriptors according to the distance in Euclidean space
+	showkeys.m           - display SIFT descriptors
+	getPosition.m        - find the estimated position (x,y) for an object on a scene
+	objectScenesDistance - find the distance between the same object in two scenes
+	objectsDistance	     - find the distance between two objects in the same image
 	
 ## Sample Experiment Results
 
-#### Distance between two objects in tha same image
+#### Distance between two objects in the same image
 
 <img src="experiment/features.png" width='333' height='266' align="middle"><img src="experiment/books_distance.png" width='355' height='266' align="middle">  
+
+<pre><code>dist = objectsDistance('images/book1.jpg', 'images/book2.jpg', 'images/scene1.jpg');</pre></code>
 
 :straight_ruler: Result: approximately 592px.
 
 #### Distance between the same object in different scenes
 
-<img src="experiment/scene.png" width='505' height='207' align="middle"><img src="experiment/book_distance_scene.png" width='355' height='266' align="middle">  
+<img src="experiment/scene.png" width='505' height='207' align="middle"><img src="experiment/book_distance_scene.png" width='355' height='266' align="middle">
+
+<pre><code>dist = objectScenesDistance('images/book1.jpg','images/scene1.jpg','images/scene2.jpg');</pre></code>
 
 :straight_ruler: Result: approximately 471px.
 

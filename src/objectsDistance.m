@@ -1,5 +1,5 @@
 function [ dist ] = objectsDistance( object1, object2, scene )
-% Function: Find the distance two objects in the same imageeeee
+% Function: Find the distance between two objects in the same image
 % Usage:
 % 
 %       [ dist ] = objectScenesDistance( object, scene1, scene2 )

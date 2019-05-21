@@ -29,3 +29,6 @@ octave-workspace
 
 # SIFT temporary files
 tmp.*
+
+# Thumbs
+Thumbs.*

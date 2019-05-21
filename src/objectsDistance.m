@@ -1,25 +1,25 @@
 function [ dist ] = objectsDistance( object1, object2, scene )
-% Function: Match the SIFT descriptors between two images
+% Function: Find the distance two objects in the same imageeeee
 % Usage:
 % 
-%       [index1, index2] = SIFTmatch(descpt1, descpt2, num)
+%       [ dist ] = objectScenesDistance( object, scene1, scene2 )
 %   where:
-%       index1 - indices of the matched features in the first set
-%       index2 - indices of the matched features in the second set
-%       num - number of valid matches
-%       descpt1 - first descriptor set
-%       descpt2 - second descriptor est
+%       object1 - object one image file
+%       object2 - object two image file
+%       scene - scene image file
+%       dist - distance between the objects
 % 
-% Institute: Australian National University
-% Author: Zhen Zhang
-% Last modified: 1 Apr. 2018
-
-num = 15;       % Number of matches to be found
+% Institute: Pontificial Catholic University of Paraná¡
+% Author: Cristian Simioni Milani
+% Last modified: 20 May. 2019
 
 % Execute SIFT algorithm
 [dstImgObj1, descptObj1, locsObj1] = sift(char(object1));
 [dstImgObj2, descptObj2, locsObj2] = sift(char(object2));
 [dstImgScene, descptScene, locsScene] = sift(char(scene));
+
+% Number of matches to be found
+num = 15;
 
 % Display the features
 showkeys(dstImgObj1, locsObj1);
@@ -40,38 +40,19 @@ figure;
 showMatchedFeatures(dstImgObj2, dstImgScene, ...
     locsObj2(indexObj2, [2 1]), locsScene(indexScene2, [2 1]), 'montage');
 
-%I = dstImg1;
-%M = locs1(index1, [2 1]);
-%col = zeros(num,1);
-%col(num,:) = 3;
-%arr = [M col];
-%insertShape(I, 'circle', arr, 'LineWidth',5);
-%RGB = insertShape(I, 'circle', arr, 'LineWidth',5);
-%figure, imshow(RGB)
+% Calculate the estimated object coordinate on scenes
+pos1 = locsScene(indexScene1, [2 1]);
+pos2 = locsScene(indexScene2, [2 1]);
 
-%I = dstImg2;
-%M = locs2(index2, [2 1]);
-%col = zeros(num,1);
-%col(num,:) = 3;
-%arr = [M col];
-%insertShape(I, 'circle', arr, 'LineWidth',5);
-%RGB = insertShape(I, 'circle', arr, 'LineWidth',5);
-%figure, imshow(RGB)
+% Calculate the distante
+avg1=mean(pos1);
+avg2=mean(pos2);
+dist = norm(avg1 - avg2);
 
-% distancia entre dois pontos
-imagem1 = locsScene(indexScene1, [2 1]);
-imagem2 = locsScene(indexScene2, [2 1]);
-
-objAvg1=mean(imagem1);
-objAvg2=mean(imagem2);
-
-dist = norm(objAvg1 - objAvg2);
-
-
-sceneDist = insertShape(dstImgScene,'Line',[objAvg1 objAvg2],'LineWidth',2,'Color','yellow');
+% Draw a line between both object positions
+sceneDist = insertShape(dstImgScene,'Line',[avg1 avg2],'LineWidth',2,'Color','yellow');
 figure, imshow(sceneDist);
 
-fprintf('A distância entre os objetos é de aproximadamente %f pixels.\n', dist);
+fprintf('The distance between the objects is approximately %f pixels.\n', dist);
 
 end
-
